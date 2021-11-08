@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "host": "apps/host",
+    "host-e2e": "apps/host-e2e",
+    "remote": "apps/remote",
+    "remote-e2e": "apps/remote-e2e"
+  }
+}

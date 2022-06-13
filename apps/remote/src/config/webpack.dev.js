@@ -2,41 +2,30 @@ const { merge } = require('webpack-merge');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const deps = require('../../../../package.json').dependencies;
+const nrwlConfig = require('@nrwl/react/plugins/webpack');
 
 module.exports = (configVal, context) => {
-    // var configVal = webpackNx(config);
     configVal.context = process.cwd();
-    configVal.optimization.runtimeChunk = false
-    // // console.log(config);
-    // configVal.mode = 'development';
-    // configVal.devServer = {
-    //     // port: 4201,
-    //     historyApiFallback: {
-    //         index: "/index.html"
-    //     }
-    // };
+    nrwlConfig(configVal);
+    configVal.optimization.runtimeChunk = false;
+
+
     configVal.plugins.push(new ModuleFederationPlugin({
         name: 'remote',
         filename: 'remoteEntry.js',
         exposes: {
             './MarketingApp': './apps/remote/src/index.js'
         },
-        shared: []
+        // shared: { ...deps }
     }));
-    // configVal.plugins.push(new HtmlWebpackPlugin({
-    //     template: './apps/remote/src/index.html'
-    // }))
-    // configVal.optimization.splitChunks = {
-    //     cacheGroups: {
-    //         default: false,
-    //     },
-    // };
-    // configVal.plugins.push(new webpack.optimize.LimitChunkCountPlugin({
-    //     maxChunks: 1
-    // }));
-    configVal.output.publicPath = 'http://localhost:4201/';
-    // configVal.output.path = path.resolve(__dirname, 'dist');
-    // console.log(configVal);
+
+    if (context.configuration == 'production') {
+        configVal.output.publicPath = `https://${env.prod}/remote/`;
+    } else {
+        configVal.output.publicPath = 'http://localhost:4201/';
+    }
+
     return configVal
 }
 

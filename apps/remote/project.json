@@ -8,7 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/remote",
+        "outputPath": "dist/apps/host/remote",
         "index": "apps/remote/src/index.html",
         "baseHref": "/",
         "main": "apps/remote/src/main.tsx",

@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const deps = require('../../../../package.json').dependencies;
 const nrwlConfig = require('@nrwl/react/plugins/webpack');
+const env = require('../../../../environments/environment.ts')
 
 module.exports = (configVal, context) => {
     configVal.context = process.cwd();

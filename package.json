@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "concurrently \"nx run host:serve\"  \"nx run remote:serve\" ",
-    "build": "nx build",
+    "build":  "concurrently \"nx run host:build\"  \"nx run remote:build\" ",
     "test": "nx test"
   },
   "private": true,
